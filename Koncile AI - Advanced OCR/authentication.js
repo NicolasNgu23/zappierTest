@@ -1,5 +1,5 @@
 const options = {
-  url: 'https://api.koncile.ai/v1/check_api_key/',
+  url: 'http://test-api.koncile.ai:8000/v1/check_api_key/',
   method: 'POST',
   headers: {
     'Authorization': `Bearer ${bundle.authData.api_key}`

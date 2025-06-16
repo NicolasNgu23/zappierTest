@@ -1,3 +1,4 @@
+require('dotenv').config();
 /* globals describe, test, expect */
 const zapier = require('zapier-platform-core');
 const App = require('../index');
@@ -13,7 +14,7 @@ describe('Koncile.ai Integration', () => {
   if (!TEST_API_KEY) {
     throw new Error('Missing API_KEY in environment variables! Provide one before testing.');
   }
-  
+
   // 1) Authentication Test
   test('should authenticate successfully with a valid API key', async () => {
     const bundle = {
@@ -27,7 +28,7 @@ describe('Koncile.ai Integration', () => {
     // Adjust this assertion based on your check_api_key response
     // Example: expect(result.success).toBe(true);
   });
-  
+
   test('should download a file and upload it', async () => {
     // Make sure you set process.env.API_KEY or use a .env file
     const apiKey = process.env.API_KEY;

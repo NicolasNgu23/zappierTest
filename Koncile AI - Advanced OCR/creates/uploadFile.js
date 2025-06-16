@@ -32,7 +32,7 @@ const perform = async (z, bundle) => {
   stream.resume();
 
   const requestOptions = {
-    url: 'https://api.koncile.ai/v1/upload_file/',
+    url: 'http://test-api.koncile.ai:8000/v1/upload_file/',
     method: 'POST',
     params: {
       folder_id: bundle.inputData.folder_id,
