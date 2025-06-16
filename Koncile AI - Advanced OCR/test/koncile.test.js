@@ -42,7 +42,7 @@ describe('Koncile.ai Integration', () => {
       },
       inputData: {
         folder_id: 453, // Replace with a valid folder_id for your Koncile account
-        template_id: 1776, // Replace with a valid template_id
+        template_id: 3744, // Replace with a valid template_id
         file: TEST_FILE_URL, // The file to download + re-upload
       }
     };
