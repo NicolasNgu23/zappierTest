@@ -1,12 +1,11 @@
 const https = require('https');
 const FormData = require('form-data');
 
-// Télécharge un fichier distant en stream
 const makeDownloadStream = (url) =>
   new Promise((resolve, reject) => {
     https
       .request(url, (res) => {
-        res.pause(); // On prépare le stream pour form-data
+        res.pause(); // on attend que le stream soit attaché
         resolve(res);
       })
       .on('error', reject)
@@ -14,14 +13,17 @@ const makeDownloadStream = (url) =>
   });
 
 const perform = async (z, bundle) => {
-  const fileUrl = bundle.inputData?.file;
-  const originalFilename = bundle.inputData?.filename || 'uploaded-from-zapier.bin';
+  const fileUrl = bundle.inputData.file;
+  const fileName = bundle.inputData.fileName || 'uploaded-from-zapier.txt';
+
+  z.console.log('📦 inputData:', bundle.inputData);
+  z.console.log('📄 fileName used:', fileName);
 
   const stream = await makeDownloadStream(fileUrl);
 
   const form = new FormData();
   form.append('files', stream, {
-    filename: originalFilename
+    filename: fileName
   });
 
   stream.resume();
@@ -50,10 +52,11 @@ const perform = async (z, bundle) => {
   }
 
   const result = response.json;
+
   return {
     ...result,
     uploaded_file_url: fileUrl,
-    uploaded_filename: originalFilename
+    uploaded_file_name: fileName
   };
 };
 
@@ -68,36 +71,41 @@ module.exports = {
     inputFields: [
       {
         key: 'folder_id',
-        label: 'Folder ID',
+        label: 'Folder',
         required: true,
-        type: 'string'
+        type: 'string',
+        dynamic: 'folderList.id.name',
+        helpText: 'Choisissez un dossier depuis votre compte Koncile.'
       },
       {
         key: 'template_id',
-        label: 'Template ID',
+        label: 'Template',
         required: true,
-        type: 'string'
+        type: 'string',
+        dynamic: 'templateList.id.name',
+        helpText: 'Choisissez un template en fonction du dossier sélectionné.'
       },
       {
         key: 'file',
         label: 'File URL',
+        helpText:
+          'A URL to the file you want to upload. In real Zaps, this is often provided by a previous step.',
         required: true,
-        type: 'file',
-        helpText: 'URL of the file to upload (e.g. from Google Drive or Slack)'
+        type: 'file'
       },
       {
-        key: 'filename',
-        label: 'Original Filename',
-        required: false,
-        type: 'string',
-        helpText: 'The real name of the file (e.g. facture.pdf). Used for correct file type.'
+        key: 'fileName',
+        label: 'File Name',
+        helpText: 'The name of the file, including extension (e.g. "invoice.pdf")',
+        required: true,
+        type: 'string'
       }
     ],
     perform,
     sample: {
-      task_ids: [123],
-      uploaded_file_url: 'https://cdn.zapier.com/storage/files/fichier.pdf',
-      uploaded_filename: 'fichier.pdf'
+      task_ids: [123, 456],
+      uploaded_file_url: 'https://cdn.zapier.com/storage/files/abc123.pdf',
+      uploaded_file_name: 'invoice.pdf'
     }
   }
 };

@@ -1,12 +1,12 @@
 // index.js
 const uploadFileV10 = require('./creates/uploadFile');
+const fetchFolders = require('./resources/fetchFolders');
+const fetchTemplates = require('./resources/fetchTemplates');
 
 module.exports = {
-  // typical package + platform version
   version: require('./package.json').version,
   platformVersion: require('zapier-platform-core').version,
 
-  // if you have an auth block, it might look like this:
   authentication: {
     type: 'custom',
     test: {
@@ -21,7 +21,13 @@ module.exports = {
     ]
   },
 
-  // The important part is exposing `uploadFile_v10` in "creates"
+  resources: {
+    folderList: fetchFolders,
+    templateList: fetchTemplates
+  },
+
+
+
   creates: {
     [uploadFileV10.key]: uploadFileV10
   },
