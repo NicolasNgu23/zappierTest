@@ -1,5 +1,6 @@
 // index.js
 const uploadFileV10 = require('./creates/uploadFile');
+const uploadCsvToGoogleDrive = require('./creates/uploadCsvToGoogleDrive');
 const fetchFolders = require('./resources/fetchFolders');
 const fetchTemplates = require('./resources/fetchTemplates');
 
@@ -26,10 +27,9 @@ module.exports = {
     templateList: fetchTemplates
   },
 
-
-
   creates: {
-    [uploadFileV10.key]: uploadFileV10
+    [uploadFileV10.key]: uploadFileV10,
+    [uploadCsvToGoogleDrive.key]: uploadCsvToGoogleDrive
   },
 
   // If you have triggers/searches, they'd go here
