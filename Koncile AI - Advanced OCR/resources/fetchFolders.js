@@ -1,6 +1,6 @@
 const perform = async (z, bundle) => {
   const response = await z.request({
-    url: 'http://test-api.koncile.ai:8000/v1/fetch_all_folders/',
+    url: 'https://api.koncile.ai/v1/fetch_all_folders/',
     headers: {
       Authorization: `Bearer ${bundle.authData.api_key}`
     }
@@ -29,7 +29,8 @@ module.exports = {
   list: {
     display: {
       label: 'List Koncile Folders',
-      description: 'Lists all folders in Koncile'
+      description: 'Lists all folders in Koncile',
+      hidden: true
     },
     operation: { perform }
   }

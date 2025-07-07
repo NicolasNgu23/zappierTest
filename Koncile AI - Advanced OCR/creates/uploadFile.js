@@ -29,7 +29,7 @@ const perform = async (z, bundle) => {
   stream.resume();
 
   const requestOptions = {
-    url: 'http://test-api.koncile.ai:8000/v1/upload_file/',
+    url: 'https://api.koncile.ai/v1/upload_file/',
     method: 'POST',
     params: {
       folder_id: bundle.inputData.folder_id,
@@ -75,7 +75,7 @@ module.exports = {
         required: true,
         type: 'string',
         dynamic: 'folderList.id.name',
-        helpText: 'Choisissez un dossier depuis votre compte Koncile.'
+        helpText: 'Choose a folder from your Koncile account.'
       },
       {
         key: 'template_id',
@@ -83,7 +83,7 @@ module.exports = {
         required: true,
         type: 'string',
         dynamic: 'templateList.id.name',
-        helpText: 'Choisissez un template en fonction du dossier sélectionné.'
+        helpText: 'Choose a template based on the selected folder.'
       },
       {
         key: 'file',
