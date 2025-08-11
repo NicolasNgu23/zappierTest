@@ -2,7 +2,6 @@
 const uploadFileV10 = require('./creates/uploadFile');
 const fetchFolders = require('./resources/fetchFolders');
 const fetchTemplates = require('./resources/fetchTemplates');
-const updateCompanyWebhook = require('./creates/updateCompanyWebhook');
 
 module.exports = {
   version: require('./package.json').version,
@@ -36,9 +35,7 @@ module.exports = {
 
   creates: {
     [uploadFileV10.key]: uploadFileV10,
-    [updateCompanyWebhook.key]: updateCompanyWebhook,
   },
-
 
   // If you have triggers/searches, they'd go here
 };

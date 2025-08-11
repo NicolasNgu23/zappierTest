@@ -5,7 +5,7 @@ const makeDownloadStream = (url) =>
   new Promise((resolve, reject) => {
     https
       .request(url, (res) => {
-        res.pause(); // on attend que le stream soit attaché
+        res.pause();
         resolve(res);
       })
       .on('error', reject)
@@ -15,9 +15,6 @@ const makeDownloadStream = (url) =>
 const perform = async (z, bundle) => {
   const fileUrl = bundle.inputData.file;
   const fileName = bundle.inputData.fileName || 'uploaded-from-zapier.txt';
-
-  z.console.log('📦 inputData:', bundle.inputData);
-  z.console.log('📄 fileName used:', fileName);
 
   const stream = await makeDownloadStream(fileUrl);
 
