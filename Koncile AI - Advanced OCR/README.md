@@ -104,8 +104,7 @@ Koncile AI - Advanced OCR/
 ├── 📁 creates/              # Actions de création
 │   ├── uploadFile.js        # Action principale d'upload
 │   ├── uploadFile_v9.js     # Version précédente
-│   ├── uploadFile_v10.js    # Version optimisée
-│   └── uploadCsvToGoogleDrive.js # Action CSV spécialisée
+│   └── uploadFile_v10.js    # Version optimisée
 ├── 📁 resources/            # Resources dynamiques
 │   ├── fetchFolders.js      # Récupération des dossiers
 │   └── fetchTemplates.js    # Récupération des templates
